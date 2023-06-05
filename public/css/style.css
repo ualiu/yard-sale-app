@@ -20,10 +20,10 @@ body {
     font-size: 1.25rem;
 }
 
-/* .page-section {
+.page-section {
     background-color: red;
     height: 40%;
-} */
+}
 
 .btn-nav{
     margin-right: .5rem;
@@ -42,7 +42,7 @@ body {
 }
 
 .btn-liked{
-    color: #f03566;
+    color: #ff1800;
   }
 
 .btn-bookmarked{
@@ -54,10 +54,10 @@ body {
     color: #ffff;
 }
 
-/* .card-img-top {
+.card-img-top {
     width: 100%;
     height: 20vw;
     object-fit: cover;
-} */
+}
 
 

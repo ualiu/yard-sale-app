@@ -10,21 +10,39 @@
 <body>
   <!-- <li class="nav-item"><a class="nav-link active" href="/api/post/garagePosts">View all Garage Sales</a></li> -->
   <div class="container mt-5">
+    <div class="container mt-1">
+      <h1 class="mb-4">Here are some upcoming yard sales across Kitchener-Waterloo</h1>
+    </div>
+    
+    
     <table class="table">
       <thead>
         <tr>
-          <th>Upcoming Garage Sales</th>
+          <th scope="col">What's happening:</th>
+          <th scope="col">Who's organizing:</th>
+          <th scope="col">At address:</th>
+          <th scope="col">On what date:</th>
+          <th scope="col">At what time:</th>
         </tr>
       </thead>
       <tbody>
-        <% garageSales.forEach(garageSale => { %>
-          <tr>
-            <td><%= garageSale.title %></td>
-            <td><%= garageSale.description %></td>
-            <td><%= garageSale.location %></td>
-            <td><%= garageSale.date %></td>
-            <td><%= garageSale.time %></td>
-          </tr>
+        <% garageSales.forEach(garageSale => { 
+          let date = new Date(garageSale.date); 
+          let formattedDate = date.getDate() + '/' + (date.getMonth()+1) + '/' + date.getFullYear(); %>
+            <tr>
+                <td><%= garageSale.description %></td>
+                <td><%= garageSale._id %></td>
+                <td><%= garageSale.location %></td>
+                <td><%= formattedDate %></td>
+                <td><%= garageSale.time %></td>
+                <td>
+                  <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                    <a href="#" type="button" class="btn btn-outline-success btn-md">
+                      See pictures
+                    </a>
+                  </div>
+                </td>
+            </tr>
         <% }) %>
       </tbody>
     </table>

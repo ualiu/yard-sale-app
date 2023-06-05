@@ -5,7 +5,7 @@ const postController = require('../controllers/postController');
 
 
 router.get('/sellerHome', postController.displaySellerHomePage)
-router.get('/new', postController.displayNewCustomerForm);
+router.get('/new', postController.displayNewListingForm);
 router.get('/garagePosts', postController.getAllPosts)
 
 
