@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>listing - jard.sale</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous">
+</head>
+<body>
+  <!-- <li class="nav-item"><a class="nav-link active" href="/api/post/garagePosts">View all Garage Sales</a></li> -->
+  <div class="container mt-5">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Upcoming Garage Sales</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% garageSales.forEach(garageSale => { %>
+          <tr>
+            <td><%= garageSale.title %></td>
+            <td><%= garageSale.description %></td>
+            <td><%= garageSale.location %></td>
+            <td><%= garageSale.date %></td>
+            <td><%= garageSale.time %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+
+    <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+      <a href="/" type="button" class="btn btn-outline-danger btn-lg">
+        Return to main page
+      </a>
+    </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.2/js/bootstrap.bundle.min.js" integrity="sha512-9fDnDEZlqUSn8GOUWfPsxmAujwYQHTFv7FlRkW9Xz/aNlO6UBAvNl2N25jSWfzgUxdDwUHrlrjK/6nnXm6myng==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</body>
+</html>
