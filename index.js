@@ -1,45 +1,65 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const dotenv = require('dotenv');
+const express = require("express");
+const app = express();
+const mongoose = require("mongoose");
+const passport = require("passport");
+const session = require("express-session");
+const MongoStore = require("connect-mongo");
+const methodOverride = require("method-override");
+const flash = require("express-flash");
+const logger = require("morgan");
+const connectDB = require("./config/database");
 const bodyParser = require('body-parser');
 
-dotenv.config();
+//Use .env file in config folder
+require("dotenv").config({ path: "./config/.env" });
 
-const app = express();
+// Passport config
+require("./config/passport")(passport);
 
-app.use(bodyParser.urlencoded({ extended: true }));
-
-app.use(express.json());
-app.set('view engine', 'ejs');
-app.set('views', './views');
+//Using EJS for views
+app.set("view engine", "ejs");
 
 //Static Folder
 app.use(express.static("public"));
 
-const connectToMongoDB = async () => {
-  try {
-    await mongoose.connect(process.env.MONGODB_URI, {
-      useNewUrlParser: true,
+//Body Parsing
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(bodyParser.json());
+
+//Logging
+app.use(logger("dev"));
+
+//Use forms for put / delete
+app.use(methodOverride("_method"));
+
+connectDB().then(() => {
+  // Setup Sessions - stored in MongoDB
+  app.use(
+    session({
+      secret: "keyboard cat",
+      resave: false,
+      saveUninitialized: false,
+      store: new MongoStore({ client: mongoose.connection.getClient() }),
     })
-    console.log('Connected to MongoDB')
-  } catch (error) {
-    console.log('Failed to connect to MongoDb', error);
-    process.exit(1);
-  }
-}
+  );
+  
+  // Passport middleware
+  app.use(passport.initialize());
+  app.use(passport.session());
 
-connectToMongoDB()
+  //Use flash messages for errors, info, etc...
+  app.use(flash());
 
-app.use('/api/post', require('./routes/post'));
-app.use('/', require('./routes/auth'));
+  app.use('/', require('./routes/auth'));
+  app.use('/api/post', require('./routes/post'));
 
-// Set up non-API routes
-app.get('/', (req, res) => {
+  app.get('/', (req, res) => {
   res.render('landingPage/landingPage.ejs');
 });
+  
+  // Listen after we've connected to the DB and set up sessions/passport
+  const PORT = process.env.PORT || 3000
+  app.listen(PORT, console.log(`Server is running on ${PORT}`))
 
-if (process.env.PORT) {
-  app.listen(process.env.PORT)
-}
-
-module.exports = app
+}).catch(err => console.log('Failed to connect to DB', err));

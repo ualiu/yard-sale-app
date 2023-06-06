@@ -1,15 +1,15 @@
 const express = require('express');
 const router = express.Router();
-
+const { ensureAuth, ensureGuest } = require('../middleware/auth');
 const postController = require('../controllers/postController');
 
 
-router.get('/sellerHome', postController.displaySellerHomePage)
-router.get('/new', postController.displayNewListingForm);
+router.get('/sellerHome', ensureAuth, postController.displaySellerHomePage)
+router.get('/new', ensureAuth, postController.displayNewListingForm);
 router.get('/garagePosts', postController.getAllPosts)
 
 
-router.post('/garageSale', postController.postGarageSale)
+router.post('/garageSale',  ensureAuth, postController.postGarageSale)
 
 
 module.exports = router;
