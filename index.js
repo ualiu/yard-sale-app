@@ -3,7 +3,7 @@ const app = express();
 const mongoose = require("mongoose");
 const passport = require("passport");
 const session = require("express-session");
-const MongoStore = require("connect-mongo");
+const MongoStore = require("connect-mongo")(session);
 const methodOverride = require("method-override");
 const flash = require("express-flash");
 const logger = require("morgan");
@@ -40,7 +40,7 @@ connectDB().then(() => {
       secret: "keyboard cat",
       resave: false,
       saveUninitialized: false,
-      store: new MongoStore({ client: mongoose.connection.getClient() }),
+      store: new MongoStore({ mongooseConnection: mongoose.connection }),
     })
   );
   
@@ -55,11 +55,10 @@ connectDB().then(() => {
   app.use('/api/post', require('./routes/post'));
 
   app.get('/', (req, res) => {
-  res.render('landingPage/landingPage.ejs');
-});
+    res.render('landingPage/landingPage.ejs');
+  });
   
   // Listen after we've connected to the DB and set up sessions/passport
-  const PORT = process.env.PORT || 3000
-  app.listen(PORT, console.log(`Server is running on ${PORT}`))
-
+  const PORT = process.env.PORT || 3000;
+  app.listen(PORT, console.log(`Server is running on ${PORT}`));
 }).catch(err => console.log('Failed to connect to DB', err));
