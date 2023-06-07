@@ -6,6 +6,7 @@ const postController = require('../controllers/postController');
 
 router.get('/sellerHome', ensureAuth, postController.displaySellerHomePage)
 router.get('/new', ensureAuth, postController.displayNewListingForm);
+router.get('/sellerHomeAllPosts', ensureAuth, postController.displaySellerHomeAllPosts)
 router.get('/garagePosts', postController.getAllPosts)
 
 

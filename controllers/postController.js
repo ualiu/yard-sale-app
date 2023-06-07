@@ -42,3 +42,19 @@ exports.getAllPosts = async (req, res) => {
   }
 };
 
+exports.displaySellerHomeAllPosts = async (req, res) => {
+  try {
+    const isAuthenticated = req.isAuthenticated();
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const garageSales = await Post.find({ date: { $gte: today } }).populate();
+    console.log(garageSales);
+
+    res.render('sellerHome/sellerHomeAllPosts.ejs', { garageSales, isAuthenticated });
+
+  } catch (error) {
+    console.log(error);
+  }
+}
+

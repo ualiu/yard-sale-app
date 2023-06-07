@@ -19,35 +19,14 @@
     />
     <link rel="stylesheet" href="/css/style.css" />
   </head>
-  <body>
-
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #0c0c18">
-      <div class="container">
-        <a class="navbar-brand">
-          <img src="/public/imgs/logo.png" alt="" width="100" height="100">
-        </a>
-        <div class="mt-4">
-          <a href="/api/post/new" class="btn btn-outline-success btn-lg"><i class="fas fa-plus"></i> Add new</a>
-          <a href="/api/post/sellerHomeAllPosts" class="btn btn-outline-warning btn-lg"><i class="fas fa-arrow-left"></i> View all Yard Sales</a>
-          <a href="/logout" class="btn btn-outline-danger btn-lg" role="button">Logout</a>
-        </div>
-        </div>
-    </nav>
-  
-  <div class="container col-xxl-8 px-4 py-5 card-container">
+<body>
+  <!-- <li class="nav-item"><a class="nav-link active" href="/api/post/garagePosts">View all Garage Sales</a></li> -->
   <div class="container mt-5">
+    <div class="container mt-1">
+      <h1 class="mb-4">Here are all upcoming yard sales across Kitchener-Waterloo</h1>
+    </div>
     
-    <h1 class="mb-4">Welcome to your Dashboard</h1>
-    <p class="lead">Manage all your posts and yard sales here.</p>
     
-
-  </div>
-</div>
-
-
-  <div class="container mt-5">
-    
-    <h2 class="mb-4">users posts will be displayed here in the table below:</h2>
     <table class="table">
       <thead>
         <tr>
@@ -58,15 +37,31 @@
           <th scope="col">At what time:</th>
         </tr>
       </thead>
+      <tbody>
+        <% garageSales.forEach(garageSale => { 
+          let date = new Date(garageSale.date); 
+          let formattedDate = date.getDate() + '/' + (date.getMonth()+1) + '/' + date.getFullYear(); %>
+            <tr>
+                <td><%= garageSale.description %></td>
+                <td><%= garageSale._id %></td>
+                <td><%= garageSale.location %></td>
+                <td><%= formattedDate %></td>
+                <td><%= garageSale.time %></td>
+                <td>
+                  <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                    <a href="#" type="button" class="btn btn-outline-success btn-md">
+                      See pictures
+                    </a>
+                  </div>
+                </td>
+            </tr>
+        <% }) %>
+      </tbody>
+    </table>
 
-    
-
-  </div>
-
-  
-  
-
-
+    <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+      <a href="/api/post/sellerHome" class="btn btn-outline-danger btn-lg"><i class="fas fa-arrow-left"></i> Return to Dashboard</a>
+    </div>
 
   <!-- Bootstrap JS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.2/js/bootstrap.bundle.min.js" integrity="sha512-9fDnDEZlqUSn8GOUWfPsxmAujwYQHTFv7FlRkW9Xz/aNlO6UBAvNl2N25jSWfzgUxdDwUHrlrjK/6nnXm6myng==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
