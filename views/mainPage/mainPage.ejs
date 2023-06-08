@@ -45,7 +45,7 @@
           let formattedDate = date.getDate() + '/' + (date.getMonth()+1) + '/' + date.getFullYear(); %>
             <tr>
                 <td><%= garageSale.description %></td>
-                <td><%= garageSale._id %></td>
+                <td><%= garageSale.userID.userName %></td>
                 <td><%= garageSale.location %></td>
                 <td><%= formattedDate %></td>
                 <td><%= garageSale.time %></td>

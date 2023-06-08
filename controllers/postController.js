@@ -19,6 +19,7 @@ exports.postGarageSale = async (req, res, next) => {
       location,
       date: new Date(date),
       time,
+      userID: req.user.id,
   });
   try {
       await garageSale.save();
@@ -33,14 +34,16 @@ exports.getAllPosts = async (req, res) => {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
-    const garageSales = await Post.find({ date: { $gte: today } }).populate();
+    const garageSales = await Post.find({ date: { $gte: today } }).populate('userID');
     console.log(garageSales);
 
     res.render('mainPage/mainPage.ejs', { garageSales });
   } catch (error) {
     console.error(error);
+    res.status(500).send('Server Error');
   }
 };
+
 
 exports.displaySellerHomeAllPosts = async (req, res) => {
   try {
@@ -48,7 +51,7 @@ exports.displaySellerHomeAllPosts = async (req, res) => {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
-    const garageSales = await Post.find({ date: { $gte: today } }).populate();
+    const garageSales = await Post.find({ date: { $gte: today } }).populate('userID');
     console.log(garageSales);
 
     res.render('sellerHome/sellerHomeAllPosts.ejs', { garageSales, isAuthenticated });
@@ -57,4 +60,16 @@ exports.displaySellerHomeAllPosts = async (req, res) => {
     console.log(error);
   }
 }
+
+exports.displaySellerHomePage = async (req, res) => {
+  try {
+    const userId = req.user._id;
+    const sellersPosts = await Post.find({ userID: userId }).populate('userID');
+    res.render('sellerHome/sellerHomeMain.ejs', { sellersPosts: sellersPosts, userID: userId }); // Pass sellersPosts variable to the view
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+
 

@@ -22,28 +22,11 @@ time: {
     type: String,
     required: true,
 },
-// items: [{
-//     itemName: {
-//         type: String,
-//         required: true,
-//     },
-//     itemDescription: {
-//         type: String,
-//         required: true,
-//     },
-//     itemPrice: {
-//         type: Number,
-//         required: true,
-//     },
-//     itemImage: {
-//         type: String,
-//     },
-// }],
-// userID: {
-//     type: mongoose.Schema.Types.ObjectId,
-//     ref: 'User',
-//     required: true,
-// },
+userID: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+},
 });
 
 

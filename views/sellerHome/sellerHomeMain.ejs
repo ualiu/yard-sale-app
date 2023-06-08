@@ -47,15 +47,43 @@
 
   <div class="container mt-5">
     
-    <h2 class="mb-4">users posts will populate and display here:</h2>
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">Your post description:</th>
-          <th scope="col">Date:</th>
-          <th scope="col">Time:</th>
-        </tr>
-      </thead>
+    <h2 class="mb-4">Here are all your listings:</h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Your post description:</th>
+            <!-- <th scope="col">Owner:</th> -->
+            <th scope="col">Date:</th>
+            <th scope="col">Time:</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% sellersPosts.forEach(sellerPost => { %>
+            <% let date = new Date(sellerPost.date); %>
+            <% let formattedDate = date.getDate() + '/' + (date.getMonth()+1) + '/' + date.getFullYear(); %>
+            <tr>
+              <td><%= sellerPost.description %></td>
+              <!-- <td><%= sellerPost.userID.userName %></td> -->
+              <td><%= formattedDate %></td>
+              <td><%= sellerPost.time %></td>
+              <td>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                  <a href="#" type="button" class="btn btn-outline-success btn-md">
+                    Edit
+                  </a>
+                  <a href="#" type="button" class="btn btn-outline-success btn-md">
+                    Delete
+                  </a>
+                </div>
+                
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+        
+    </table>
+            
+              
 
     
 
