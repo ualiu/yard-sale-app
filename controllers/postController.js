@@ -75,8 +75,20 @@ exports.displaySellerHomeAllPosts = async (req, res) => {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
-    const garageSales = await Post.find({ date: { $gte: today } }).populate('userID');
-    const numOfPosts = garageSales.length;
+    const PAGE_SIZE = 5;
+    const page = parseInt(req.query.page || 1);
+
+    const skipPosts = (page - 1) * PAGE_SIZE;
+
+    const garageSales = await Post.find({ date: { $gte: today } })
+      .skip(skipPosts)
+      .limit(PAGE_SIZE)
+      .populate('userID');
+
+    // const garageSales = await Post.find({ date: { $gte: today } }).populate('userID');
+    const numOfPosts = await Post.countDocuments({ date: { $gte: today } });
+
+    const totalPages = Math.ceil(numOfPosts / PAGE_SIZE);
 
     // Modify the date format for each garage sale
     const formattedGarageSales = garageSales.map(garageSale => ({
@@ -91,7 +103,9 @@ exports.displaySellerHomeAllPosts = async (req, res) => {
     res.render('sellerHome/sellerHomeAllPosts.ejs', {
       garageSales: formattedGarageSales,
       isAuthenticated,
-      numOfPosts
+      numOfPosts,
+      currentPage: page, 
+      totalPages
     });
   } catch (error) {
     console.log(error);

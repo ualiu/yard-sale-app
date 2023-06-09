@@ -75,6 +75,17 @@
     <div class="d-grid gap-2 d-md-flex justify-content-md-start">
       <a href="/api/post/sellerHome" class="btn btn-outline-danger btn-lg"><i class="fas fa-arrow-left"></i> Return to Dashboard</a>
     </div>
+    <div class="container mt-4">
+      <nav aria-label="Page navigation">
+        <ul class="pagination">
+          <% for (let i = 1; i <= totalPages; i++) { %>
+            <li class="page-item <%= currentPage == i ? 'active' : '' %>">
+              <a class="page-link" href="?page=<%= i %>"><%= i %></a>
+            </li>
+          <% } %>
+        </ul>
+      </nav>
+    </div>
   </div>
 
   <!-- Bootstrap JS -->
