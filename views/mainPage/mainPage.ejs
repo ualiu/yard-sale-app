@@ -52,10 +52,16 @@
                 <td><%= garageSale.time %></td>
                 <td>
                   <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-                    <a href="#" type="button" class="btn btn-outline-success btn-md"><i class="fas fa-eye"></i></i>
+                    <a href="#" type="button" class="btn btn-outline-success btn-md" onclick="alertMessage()"><i class="fas fa-eye"></i>
                       See pictures
                     </a>
-                  </div>
+                </div>
+                
+                <script>
+                    function alertMessage() {
+                        alert("Sorry this feature doesn't work yet. It will be available soon!");
+                    }
+                </script>
                 </td>
             </tr>
         <% }) %>

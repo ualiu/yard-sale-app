@@ -72,9 +72,15 @@
                 <a href="/api/post/getEdit/<%= sellerPost._id %>" type="button" class="btn btn-outline-success btn-md">
                   <i class="far fa-edit"></i> Edit
                 </a>
-                <a href="#" type="button" class="btn btn-outline-danger btn-md">
+                <a href="#" type="button" class="btn btn-outline-danger btn-md" onclick="alertMessage()">
                   <i class="far fa-trash-alt"></i> Delete
                 </a>
+              
+              <script>
+                  function alertMessage() {
+                      alert("Sorry this feature doesn't work yet. It will be available soon!");
+                  }
+              </script>
               </div>
             </td>
           </tr>
