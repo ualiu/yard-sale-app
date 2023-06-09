@@ -47,17 +47,26 @@ exports.getAllPosts = async (req, res) => {
   try {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
+    const PAGE_SIZE = 5;
+    const page = parseInt(req.query.page || 1);
 
-    const garageSales = await Post.find({ date: { $gte: today } }).populate('userID');
-    console.log(garageSales);
-    const numOfPosts = garageSales.length
+    const skipPosts = (page - 1) * PAGE_SIZE;
 
-    res.render('mainPage/mainPage.ejs', { garageSales, numOfPosts });
+    const garageSales = await Post.find({ date: { $gte: today } })
+      .skip(skipPosts)
+      .limit(PAGE_SIZE)
+      .populate('userID');
+
+    const numOfPosts = await Post.countDocuments({ date: { $gte: today } });
+    const totalPages = Math.ceil(numOfPosts / PAGE_SIZE);
+
+    res.render('mainPage/mainPage.ejs', { garageSales, numOfPosts, currentPage: page, totalPages });
   } catch (error) {
     console.error(error);
     res.status(500).send('Server Error');
   }
 };
+
 
 
 exports.displaySellerHomeAllPosts = async (req, res) => {
