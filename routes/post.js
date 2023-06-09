@@ -10,12 +10,14 @@ router.get('/sellerHome', ensureAuth, postController.displaySellerHomePage)
 router.get('/new', ensureAuth, postController.displayNewListingForm);
 router.get('/sellerHomeAllPosts', ensureAuth, postController.displaySellerHomeAllPosts)
 router.get('/garagePosts', postController.getAllPosts)
+router.get('/getEdit/:id', ensureAuth, postController.displayEditForm)
 
 // router.post('/garageSale', upload.array('images', 5), postController.postGarageSale);
 // router.get('/upload', postController.renderImages);
 
 
 router.post('/garageSale',  ensureAuth, postController.postGarageSale)
+router.put('/:id', ensureAuth, postController.updatePost)
 
 
 module.exports = router;

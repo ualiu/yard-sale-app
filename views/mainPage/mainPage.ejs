@@ -25,10 +25,11 @@
   
   <div class="container mt-5">
     <div class="container mt-1">
-      <h1 class="mb-4">Here are all upcoming posted yard sales in Kitchener-Waterloo:</h1>
+      <h1 class="mb-4">Currently, there are <span style="color:green">(<b><%= numOfPosts %></b>)</span> upcoming yard sales posted in Kitchener-Waterloo:</h1>
+    </div>
     </div>
     
-    
+    <div class="container mt-5">
     <table class="table">
       <thead>
         <tr>
@@ -51,7 +52,7 @@
                 <td><%= garageSale.time %></td>
                 <td>
                   <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-                    <a href="#" type="button" class="btn btn-outline-success btn-md">
+                    <a href="#" type="button" class="btn btn-outline-success btn-md"><i class="fas fa-eye"></i></i>
                       See pictures
                     </a>
                   </div>
@@ -62,10 +63,11 @@
     </table>
 
     <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-      <a href="/" type="button" class="btn btn-outline-danger btn-lg">
+      <a href="/" type="button" class="btn btn-outline-danger btn-lg"><i class="fas fa-arrow-left"></i>
         Return to main page
       </a>
     </div>
+  </div>
 
   <!-- Bootstrap JS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.2/js/bootstrap.bundle.min.js" integrity="sha512-9fDnDEZlqUSn8GOUWfPsxmAujwYQHTFv7FlRkW9Xz/aNlO6UBAvNl2N25jSWfzgUxdDwUHrlrjK/6nnXm6myng==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
