@@ -45,53 +45,44 @@
 </div>
 
 
-  <div class="container mt-5">
-    
+<div class="container mt-5">
+  <% if (sellersPosts.length === 0) { %>
+    <h2 class="mb-4">You have no upcoming yard sales. Create a post now to start selling your items.</h2>
+  <% } else { %>
     <h2 class="mb-4">Here are all your listings:</h2>
-      <table class="table">
-        <thead>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Your post description:</th>
+          <th scope="col">Date:</th>
+          <th scope="col">Time:</th>
+          <th scope="col">Actions:</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% sellersPosts.forEach(sellerPost => { %>
+          <% let date = new Date(sellerPost.date); %>
+          <% let formattedDate = date.getDate() + '/' + (date.getMonth()+1) + '/' + date.getFullYear(); %>
           <tr>
-            <th scope="col">Your post description:</th>
-            <!-- <th scope="col">Owner:</th> -->
-            <th scope="col">Date:</th>
-            <th scope="col">Time:</th>
+            <td><%= sellerPost.description %></td>
+            <td><%= formattedDate %></td>
+            <td><%= sellerPost.time %></td>
+            <td>
+              <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                <a href="/api/post/getEdit/<%= sellerPost._id %>" type="button" class="btn btn-outline-success btn-md">
+                  <i class="far fa-edit"></i> Edit
+                </a>
+                <a href="#" type="button" class="btn btn-outline-danger btn-md">
+                  <i class="far fa-trash-alt"></i> Delete
+                </a>
+              </div>
+            </td>
           </tr>
-        </thead>
-        <tbody>
-          <% sellersPosts.forEach(sellerPost => { %>
-            <% let date = new Date(sellerPost.date); %>
-            <% let formattedDate = date.getDate() + '/' + (date.getMonth()+1) + '/' + date.getFullYear(); %>
-            <tr>
-              <td><%= sellerPost.description %></td>
-              <!-- <td><%= sellerPost.userID.userName %></td> -->
-              <td><%= formattedDate %></td>
-              <td><%= sellerPost.time %></td>
-              <td>
-                <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-                  <a href="/api/post/getEdit/<%= sellerPost._id %>" type="button" class="btn btn-outline-success btn-md">
-                    <i class="far fa-edit"></i> Edit
-                  </a>
-                  
-                  <a href="#" type="button" class="btn btn-outline-danger btn-md"><i class="far fa-trash-alt"></i>
-                    Delete
-                  </a>
-                </div>
-                
-              </td>
-            </tr>
-          <% }) %>
-        </tbody>
-        
+        <% }) %>
+      </tbody>
     </table>
-            
-              
-
-    
-
-  </div>
-
-  
-  
+  <% } %>
+</div>
 
 
 

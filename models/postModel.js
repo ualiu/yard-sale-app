@@ -16,7 +16,6 @@ location: {
 date: {
     type: Date,
     required: true,
-    default: Date.now
 },
 time: {
     type: String,
