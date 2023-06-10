@@ -172,6 +172,25 @@ exports.updatePost = async (req, res) => {
   }
 };
 
+exports.deletePost = async (req, res) => {
+  try {
+    const postId = req.params.id;
+    const userId = req.user._id;
+
+    const postToDelete = await Post.findOneAndRemove({ _id: postId, userID: userId });
+
+    if (postToDelete) {
+      res.redirect('/api/post/sellerHome');
+    } else {
+      res.status(404).json({ message: 'Post not found' });
+    }
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+
+
 
 
 

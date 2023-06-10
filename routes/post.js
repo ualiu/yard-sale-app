@@ -18,6 +18,7 @@ router.get('/getEdit/:id', ensureAuth, postController.displayEditForm)
 
 router.post('/garageSale',  ensureAuth, postController.postGarageSale)
 router.put('/:id', ensureAuth, postController.updatePost)
+router.delete('/:id', ensureAuth, postController.deletePost)
 
 
 module.exports = router;

@@ -23,7 +23,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #0c0c18">
       <div class="container">
-        <a class="navbar-brand">
+        <a class="navbar-brand" href="/">
           <img src="/public/imgs/logo1.png" alt="" width="100" height="100">
         </a>
         <div class="mt-4">
@@ -72,9 +72,12 @@
                 <a href="/api/post/getEdit/<%= sellerPost._id %>" type="button" class="btn btn-outline-success btn-md">
                   <i class="far fa-edit"></i> Edit
                 </a>
-                <a href="#" type="button" class="btn btn-outline-danger btn-md" onclick="alertMessage()">
-                  <i class="far fa-trash-alt"></i> Delete
-                </a>
+
+                <form action="/api/post/<%= sellerPost._id %>?_method=DELETE" method="POST" class="d-inline-block">
+                  <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i> Delete</button>
+                </form>                
+                
+                
               
               <script>
                   function alertMessage() {
