@@ -47,6 +47,17 @@
     <div class="mb-3">
         <label for="date" class="form-label">Date</label>
         <input type="date" class="form-control" id="date" name="date" value="<%= postToEdit.date %>">
+        <script>
+          const form = document.querySelector('form'); // Select the form element
+        
+          form.addEventListener('submit', (event) => {
+            const dateInput = document.querySelector('#date');
+            if (dateInput.value === '') {
+              event.preventDefault(); // Prevent form submission
+              alert('Please re-enter and confirm the date for your yard sale again!'); // Show alert message
+            }
+          });
+        </script>
     </div>
 
     <!-- <div class="mb-3">

@@ -158,7 +158,6 @@ exports.updatePost = async (req, res) => {
       // Create the parsed date using the year, month, and day
       const parsedDate = moment(`${year}-${month}-${day}`).toDate();
       postToEdit.date = parsedDate;
-
       postToEdit.time = req.body.time || postToEdit.time;
 
       const updatedPost = await postToEdit.save();
