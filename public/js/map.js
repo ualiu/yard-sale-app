@@ -17,33 +17,45 @@ function provideDirections(destination) {
 
 // Fetch yard sales from API
 async function getAllYardSales() {
-  const res = await fetch('/api/post/displayPostOnMap');
-  const data = await res.json();
-
-  const yardSales = data.data.map(yardSale => {
-    return {
-      type: 'Feature',
-      geometry: {
-        type: 'Point',
-        coordinates: [
-          yardSale.location.coordinates[0],
-          yardSale.location.coordinates[1]
-        ]
-      },
-      properties: {
-        title: yardSale.title,
-        description: yardSale.description,
-        formattedAddress: yardSale.location.formattedAddress,
-        date: yardSale.date,
-        time: yardSale.time,
-        userID: yardSale.userID.userName,
-        icon: 'shop'
-      }
-    };
-  });
-
-  loadMap(yardSales);
+  try {
+    const res = await fetch('/api/post/displayPostOnMap');
+    if (!res.ok) { // Check if response went through
+      console.log('API response Error: ', res);
+      return;
+    }
+    const data = await res.json();
+    if (!data.data) { // Check if data is not empty
+      console.log('Data Error: ', data);
+      return;
+    }
+    // Continue your processing
+    const yardSales = data.data.map(yardSale => {
+      return {
+        type: 'Feature',
+        geometry: {
+          type: 'Point',
+          coordinates: [
+            yardSale.location.coordinates[0],
+            yardSale.location.coordinates[1]
+          ]
+        },
+        properties: {
+          title: yardSale.title,
+          description: yardSale.description,
+          formattedAddress: yardSale.location.formattedAddress,
+          date: yardSale.date,
+          time: yardSale.time,
+          userID: yardSale.userID.userName,
+          icon: 'shop'
+        }
+      };
+    });
+    loadMap(yardSales);
+  } catch (error) {
+    console.log('Fetch Error: ', error);
+  }
 }
+
 
 // Load map with yard sales
 function loadMap(yardSales) {
