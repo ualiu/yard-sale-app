@@ -1,18 +1,7 @@
 // Load Mapbox Directions API Plugin
 mapboxgl.accessToken = 'pk.eyJ1IjoidWFsaXUiLCJhIjoiY2xpczg4MXAxMWZzYTNmbXJqcXVjNnRpcCJ9.zsXLm4vVZDQ9w3NRS4bDsw';
 
-const map = new mapboxgl.Map({
-  container: 'map',
-  style: 'mapbox://styles/mapbox/streets-v11',
-  zoom: 12,
-  center: [-80.49282, 43.45117]
-});
-
-const directions = new MapboxDirections({
-  accessToken: mapboxgl.accessToken
-});
-
-map.addControl(directions, 'top-left');
+let map, directions;
 
 // Function to provide directions
 function provideDirections(destination) {
@@ -100,4 +89,19 @@ function loadMap(yardSales) {
   });
 }
 
-getAllYardSales();
+window.onload = function() {
+  map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/streets-v11',
+    zoom: 12,
+    center: [-80.49282, 43.45117]
+  });
+
+  directions = new MapboxDirections({
+    accessToken: mapboxgl.accessToken
+  });
+
+  map.addControl(directions, 'top-left');
+
+  getAllYardSales();
+}
