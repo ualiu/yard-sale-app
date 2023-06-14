@@ -40,8 +40,25 @@ form.addEventListener('submit', async (e) => {
   .catch(err => console.error(err));
 });
 
-// Function to get geocoded location data (this is a placeholder - replace with your actual geocoding function)
+// // Function to get geocoded location data (this is a placeholder - replace with your actual geocoding function)
+// async function getGeocodedLocation(address) {
+//   // Make a request to your geocoding API
+//   // Return the response data
+// }
+
 async function getGeocodedLocation(address) {
-  // Make a request to your geocoding API
-  // Return the response data
+  try {
+    const response = await fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(address)}.json?access_token=${process.env.MAPBOX_ACCESS_TOKEN}`);
+    const data = await response.json();
+
+    if (data.features && data.features.length > 0) {
+      return data.features[0].geometry;  // This will get the geometry of the first matched location
+    } else {
+      throw new Error('Unable to geocode location');
+    }
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
 }
+
