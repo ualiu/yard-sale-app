@@ -57,32 +57,27 @@ async function getAllYardSales() {
 }
 
 
+// Load map with yard sales
 function loadMap(yardSales) {
   map.on('load', function() {
-    // Ensure the sprite is loaded before adding the layer
-    map.loadImage('https://docs.mapbox.com/mapbox-gl-js/assets/custom_marker.png', function(error, image) {
-      if (error) throw error;
-      if (!map.hasImage('custom-marker')) map.addImage('custom-marker', image);
-
-      map.addLayer({
-        id: 'points',
-        type: 'symbol',
-        source: {
-          type: 'geojson',
-          data: {
-            type: 'FeatureCollection',
-            features: yardSales
-          }
-        },
-        layout: {
-          'icon-image': 'custom-marker',
-          'icon-size': 0.05,
-          'text-field': '{title}',
-          'text-font': ['Open Sans Semibold', 'Arial Unicode MS Bold'],
-          'text-offset': [0, 0.9],
-          'text-anchor': 'top'
+    map.addLayer({
+      id: 'points',
+      type: 'symbol',
+      source: {
+        type: 'geojson',
+        data: {
+          type: 'FeatureCollection',
+          features: yardSales
         }
-      });
+      },
+      layout: {
+        'icon-image': '{icon}-15',
+        'icon-size': 1.5,
+        'text-field': '{title}',
+        'text-font': ['Open Sans Semibold', 'Arial Unicode MS Bold'],
+        'text-offset': [0, 0.9],
+        'text-anchor': 'top'
+      }
     });
 
     map.on('click', 'points', function (e) {
@@ -102,7 +97,7 @@ function loadMap(yardSales) {
           <button class="btn btn-outline-success btn-lg" onclick="provideDirections([${coordinates[0]}, ${coordinates[1]}])">Get Directions</button>
         `)
         .addTo(map);
-    }, 2000);
+    });
   });
 }
 
