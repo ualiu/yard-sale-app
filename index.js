@@ -34,6 +34,13 @@ app.use(logger("dev"));
 //Use forms for put / delete
 app.use(methodOverride("_method"));
 
+const corsOptions = {
+  origin: "*", // Replace "*" with the specific origins you want to allow
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  preflightContinue: false,
+  optionsSuccessStatus: 204
+};
+
 connectDB().then(() => {
   // Setup Sessions - stored in MongoDB
   app.use(
@@ -48,7 +55,7 @@ connectDB().then(() => {
   // Passport middleware
   app.use(passport.initialize());
   app.use(passport.session());
-  app.use(cors());
+  app.use(cors(corsOptions));
 
   //Use flash messages for errors, info, etc...
   app.use(flash());
