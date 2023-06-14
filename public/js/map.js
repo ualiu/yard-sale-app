@@ -71,7 +71,7 @@ function loadMap(yardSales) {
         }
       },
       layout: {
-        'icon-image': '{icon}-15',
+        'icon-image': 'marker-15',
         'icon-size': 1.5,
         'text-field': '{title}',
         'text-font': ['Open Sans Semibold', 'Arial Unicode MS Bold'],
