@@ -1,10 +1,11 @@
 const Post = require('../models/postModel')
+const Yard = require('../models/yardModel')
 const moment = require('moment');
 
 // displays new customer form -- added after
 exports.displayNewListingForm = (req, res) => {
   console.log('end point hit ok')
-  res.render('sellerHome/new.ejs');
+  res.render('sellerHome/add.ejs');
 };
 
 exports.displaySellerHomePage = (req, res) => {
@@ -14,7 +15,8 @@ exports.displaySellerHomePage = (req, res) => {
 
 exports.postGarageSale = async (req, res) => {
   try {
-    const { title, description, location, date, time } = req.body;
+
+    const { title, description, address, date, time } = req.body;
 
     // Extract the year, month, and day from the date input
     const [year, month, day] = date.split('-');
@@ -23,100 +25,147 @@ exports.postGarageSale = async (req, res) => {
     const parsedDate = moment(`${year}-${month}-${day}`).toDate();
 
     // Create the new post with the parsed date
-    const newPost = new Post({
+    const newYard = new Yard({
       title,
       description,
-      location,
+      address,
       date: parsedDate,
       time,
       userID: req.user._id
     });
 
     // Save the new post to the database
-    await newPost.save();
+    await newYard.save();
 
     res.redirect('/api/post/sellerHome');
   } catch (error) {
     console.error(error);
+    res.status(500).json({ error: 'Server Error' });
   }
 };
+// next 2 controllers are new / delete from here
 
+exports.displayPostOnMap = async (req, res, next) => {
+  try {
+    const today = new Date();
+    today.setHours(0,0,0,0);  // set the time to 00:00:00.000
 
+    const yardSales = await Yard.find({
+      date: { $gte: today }  // only find yard sales that are today or in the future
+    }).populate('userID');
+
+    return res.status(200).json({
+      success: true,
+      count: yardSales.length,
+      data: yardSales
+    })
+  } catch (err) {
+    console.error(err)
+    res.status(500).json({ error: 'Server error'})
+  }
+}
 
 exports.getAllPosts = async (req, res) => {
   try {
     const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    const PAGE_SIZE = 5;
-    const page = parseInt(req.query.page || 1);
-
-    const skipPosts = (page - 1) * PAGE_SIZE;
-
-    const garageSales = await Post.find({ date: { $gte: today } })
-      .skip(skipPosts)
-      .limit(PAGE_SIZE)
-      .populate('userID');
-
-    const numOfPosts = await Post.countDocuments({ date: { $gte: today } });
-    const totalPages = Math.ceil(numOfPosts / PAGE_SIZE);
-
-    res.render('mainPage/mainPage.ejs', { garageSales, numOfPosts, currentPage: page, totalPages });
+    today.setHours(0, 0, 0, 0); // Set to start of the day
+    const numOfPosts = await Yard.countDocuments({ date: { $gte: today } });
+    res.render('mainPage/index.ejs', { numOfPosts: numOfPosts })
   } catch (error) {
     console.error(error);
     res.status(500).send('Server Error');
   }
-};
+}
 
 
+// exports.getAllPosts = async (req, res) => {
+//   try {
+//     const today = new Date();
+//     today.setHours(0, 0, 0, 0);
+//     const PAGE_SIZE = 5;
+//     const page = parseInt(req.query.page || 1);
+
+//     const skipPosts = (page - 1) * PAGE_SIZE;
+
+//     const garageSales = await Post.find({ date: { $gte: today } })
+//       .skip(skipPosts)
+//       .limit(PAGE_SIZE)
+//       .populate('userID');
+
+//     const numOfPosts = await Post.countDocuments({ date: { $gte: today } });
+//     const totalPages = Math.ceil(numOfPosts / PAGE_SIZE);
+
+//     res.render('mainPage/mainPage.ejs', { garageSales, numOfPosts, currentPage: page, totalPages });
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).send('Server Error');
+//   }
+// };
+
+//new 
 
 exports.displaySellerHomeAllPosts = async (req, res) => {
   try {
     const isAuthenticated = req.isAuthenticated();
     const today = new Date();
-    today.setHours(0, 0, 0, 0);
-
-    const PAGE_SIZE = 5;
-    const page = parseInt(req.query.page || 1);
-
-    const skipPosts = (page - 1) * PAGE_SIZE;
-
-    const garageSales = await Post.find({ date: { $gte: today } })
-      .skip(skipPosts)
-      .limit(PAGE_SIZE)
-      .populate('userID');
-
-    // const garageSales = await Post.find({ date: { $gte: today } }).populate('userID');
-    const numOfPosts = await Post.countDocuments({ date: { $gte: today } });
-
-    const totalPages = Math.ceil(numOfPosts / PAGE_SIZE);
-
-    // Modify the date format for each garage sale
-    const formattedGarageSales = garageSales.map(garageSale => ({
-      ...garageSale.toObject(),
-      formattedDate: garageSale.date.toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-      })
-    }));
-
-    res.render('sellerHome/sellerHomeAllPosts.ejs', {
-      garageSales: formattedGarageSales,
-      isAuthenticated,
-      numOfPosts,
-      currentPage: page, 
-      totalPages
-    });
+    today.setHours(0, 0, 0, 0); // Set to start of the day
+    const numOfPosts = await Yard.countDocuments({ date: { $gte: today } });
+    res.render('sellerHome/sellersAllPostsView.ejs', { numOfPosts: numOfPosts })
   } catch (error) {
-    console.log(error);
+    console.log(error)
   }
-};
+}
+
+
+
+// exports.displaySellerHomeAllPosts = async (req, res) => {
+//   try {
+//     const isAuthenticated = req.isAuthenticated();
+//     const today = new Date();
+//     today.setHours(0, 0, 0, 0);
+
+//     const PAGE_SIZE = 5;
+//     const page = parseInt(req.query.page || 1);
+
+//     const skipPosts = (page - 1) * PAGE_SIZE;
+
+//     const garageSales = await Post.find({ date: { $gte: today } })
+//       .skip(skipPosts)
+//       .limit(PAGE_SIZE)
+//       .populate('userID');
+
+//     // const garageSales = await Post.find({ date: { $gte: today } }).populate('userID');
+//     const numOfPosts = await Post.countDocuments({ date: { $gte: today } });
+
+//     const totalPages = Math.ceil(numOfPosts / PAGE_SIZE);
+
+//     // Modify the date format for each garage sale
+//     const formattedGarageSales = garageSales.map(garageSale => ({
+//       ...garageSale.toObject(),
+//       formattedDate: garageSale.date.toLocaleDateString('en-US', {
+//         year: 'numeric',
+//         month: 'long',
+//         day: 'numeric'
+//       })
+//     }));
+
+//     res.render('sellerHome/sellerHomeAllPosts.ejs', {
+//       garageSales: formattedGarageSales,
+//       isAuthenticated,
+//       numOfPosts,
+//       currentPage: page, 
+//       totalPages
+//     });
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
 
 
 exports.displaySellerHomePage = async (req, res) => {
   try {
     const userId = req.user._id;
-    const sellersPosts = await Post.find({ userID: userId }).populate('userID');
+    const sellersPosts = await Yard.find({ userID: userId }).populate('userID');
     res.render('sellerHome/sellerHomeMain.ejs', { sellersPosts: sellersPosts });
   } catch (error) {
     console.error(error);
@@ -128,15 +177,15 @@ exports.displayEditForm = async (req, res) => {
   try {
     const userId = req.params.id;
     const filter = { _id: userId };
-    const sellersPosts = await Post.find(filter);
-    const postToEdit = await Post.findById(req.params.id);
+    const sellersPosts = await Yard.find(filter);
+    const postToEdit = await Yard.findById(req.params.id);
 
     if (!postToEdit) {
       res.status(404).json({ message: 'Post not found' });
       return;
     }
 
-    res.render('sellerHome/editPost.ejs', { sellersPosts: sellersPosts, postToEdit: postToEdit });
+    res.render('sellerHome/edit.ejs', { sellersPosts: sellersPosts, postToEdit: postToEdit });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -146,11 +195,11 @@ exports.displayEditForm = async (req, res) => {
 
 exports.updatePost = async (req, res) => {
   try {
-    const postToEdit = await Post.findById(req.params.id);
+    const postToEdit = await Yard.findById(req.params.id);
     if (postToEdit) {
       postToEdit.title = req.body.title || postToEdit.title;
       postToEdit.description = req.body.description || postToEdit.description;
-      postToEdit.location = req.body.location || postToEdit.location;
+      postToEdit.address = req.body.address || postToEdit.address; // Add this line
 
       // Extract the year, month, and day from the date input
       const [year, month, day] = req.body.date.split('-');
@@ -171,12 +220,13 @@ exports.updatePost = async (req, res) => {
   }
 };
 
+
 exports.deletePost = async (req, res) => {
   try {
     const postId = req.params.id;
     const userId = req.user._id;
 
-    const postToDelete = await Post.findOneAndRemove({ _id: postId, userID: userId });
+    const postToDelete = await Yard.findOneAndRemove({ _id: postId, userID: userId });
 
     if (postToDelete) {
       res.redirect('/api/post/sellerHome');

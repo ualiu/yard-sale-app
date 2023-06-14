@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>find yard sales in KW - jard.</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/css/style.css" />
+    
+<script src='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css' rel='stylesheet' />
+
+<!-- Add the mapbox-gl-directions plugin css -->
+<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.1/mapbox-gl-directions.css" type="text/css">
+
+<!-- Add the mapbox-gl-directions plugin js after Mapbox's JS -->
+<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.1/mapbox-gl-directions.js"></script>
+
+    <title>Store Locator</title>
+  </head>
+  <body>
+    <div class="container my-3">
+
+      <h1 class="display-4 text-center">
+        <i class="fas fa-map-marked mr-4"></i> Kitchener-Waterloo Yard Sale Locator
+      </h1>
+      
+        <p class="lead text-center">Currently, there are <span style="color:green">(<b><%= numOfPosts %></b>)</span> upcoming yard sales posted in Kitchener-Waterloo:</p>
+    
+
+      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <a href="/" type="button" class="btn btn-outline-success btn-lg"><i class="fas fa-arrow-left"></i>
+          Return to main page
+        </a>
+      </div>
+      
+      <div
+        id="map"
+        style="width: 100%; height: 800px;border-radius: 5px;"
+      ></div>
+    </div>
+
+    
+
+    <script src="/js/map.js"></script>
+  </body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>find yard sales in KW - jard.</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/css/style.css" />
+    
+<script src='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css' rel='stylesheet' />
+    <title>Store Locator - Add Store</title>
+  </head>
+  <body>
+    <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Your head content -->
+  </head>
+  <body>
+    <div class="container my-3">
+      <h1 class="display-4 text-center">
+        Add Yard Sale
+      </h1>
+      <form id="yard-form" class="mb-4">
+        <div class="form-group">
+          <label for="yard-title">Title</label>
+          <input type="text" id="yard-title" class="form-control" />
+        </div>
+        <div class="form-group">
+          <label for="yard-description">Description</label>
+          <textarea id="yard-description" class="form-control"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="yard-address">Address</label>
+          <input type="text" id="yard-address" class="form-control" />
+        </div>
+        <div class="form-group">
+          <label for="yard-date">Date</label>
+          <input type="date" id="yard-date" class="form-control" />
+        </div>
+        <div class="form-group">
+          <label for="yard-time">Time</label>
+          <input type="time" id="yard-time" class="form-control" />
+        </div>
+
+        <button type="submit" class="btn btn-outline-success btn-lg">Submit Listing</button>
+      <a href="/api/post/sellerHome" type="button" class="btn btn-outline-danger btn-lg"><i class="fas fa-arrow-left me-2"></i>Return back</a>
+      </form>
+    </div>
+
+    <script src="/js/add.js"></script>
+  </body>
+</html>
+
+  </body>
+</html>
