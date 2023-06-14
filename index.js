@@ -9,6 +9,7 @@ const flash = require("express-flash");
 const logger = require("morgan");
 const connectDB = require("./config/database");
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 //Use .env file in config folder
 require("dotenv").config({ path: "./config/.env" });
@@ -47,6 +48,7 @@ connectDB().then(() => {
   // Passport middleware
   app.use(passport.initialize());
   app.use(passport.session());
+  app.use(cors());
 
   //Use flash messages for errors, info, etc...
   app.use(flash());
