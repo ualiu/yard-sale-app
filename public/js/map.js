@@ -71,7 +71,7 @@ function loadMap(yardSales) {
         }
       },
       layout: {
-        'icon-image': 'marker-15',
+        'icon-image': '{icon}-15',
         'icon-size': 1.5,
         'text-field': '{title}',
         'text-font': ['Open Sans Semibold', 'Arial Unicode MS Bold'],
@@ -105,7 +105,7 @@ window.onload = function() {
   map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/streets-v11',
-    zoom: 12,
+    zoom: 9,
     center: [-80.49282, 43.45117]
   });
 
@@ -113,7 +113,7 @@ window.onload = function() {
     accessToken: mapboxgl.accessToken
   });
 
-  map.addControl(directions, 'top-left');
+  map.addControl(directions, 'top-right');
 
   getAllYardSales();
 }
