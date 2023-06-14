@@ -102,7 +102,7 @@ function loadMap(yardSales) {
           <button class="btn btn-outline-success btn-lg" onclick="provideDirections([${coordinates[0]}, ${coordinates[1]}])">Get Directions</button>
         `)
         .addTo(map);
-    });
+    }, 2000);
   });
 }
 
