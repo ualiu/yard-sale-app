@@ -41,7 +41,7 @@
         <p class="lead text-center">Currently, there are <span style="color:green">(<b><%= numOfPosts %></b>)</span> upcoming yard sales posted in Kitchener-Waterloo:</p>
     
 
-      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+      <div class="d-grid gap-2 d-md-flex justify-content-md-start">
         <a href="/" type="button" class="btn btn-outline-success btn-lg"><i class="fas fa-arrow-left"></i>
           Return to main page
         </a>
@@ -53,6 +53,16 @@
       ></div>
     </div>
 
+    <style>
+      #map {
+        display: none;
+      }
+    
+      #map.map-loaded {
+        display: block;
+      }
+    </style>
+    
     
 
     <script src="/js/map.js"></script>

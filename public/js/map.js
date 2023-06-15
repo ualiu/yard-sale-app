@@ -98,6 +98,7 @@ function loadMap(yardSales) {
         `)
         .addTo(map);
     });
+    document.getElementById('map').classList.add('map-loaded');
   });
 }
 
