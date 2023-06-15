@@ -46,7 +46,7 @@ async function getAllYardSales() {
           date: yardSale.date,
           time: yardSale.time,
           userID: yardSale.userID.userName,
-          icon: 'shop'
+          icon: 'cafe'
         }
       };
     });
