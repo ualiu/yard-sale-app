@@ -56,7 +56,6 @@ async function getAllYardSales() {
   }
 }
 
-
 // Load map with yard sales
 function loadMap(yardSales) {
   map.on('load', function() {
@@ -93,7 +92,7 @@ function loadMap(yardSales) {
           <p><b>When:</b> ${new Date(date).toLocaleDateString()}</p>
           <p><b>Time:</b> ${time}</p>
           <p><b>Who's organizing:</b> ${userID}</p>
-          <p class="text-primary">to enable Directions allow the app to access your location, please!</p>
+          <p class="text-primary">To enable Directions, allow the app to access your location, please!</p>
           <button class="btn btn-outline-success btn-lg" onclick="provideDirections([${coordinates[0]}, ${coordinates[1]}])">Get Directions</button>
         `)
         .addTo(map);
@@ -116,4 +115,4 @@ window.onload = function() {
   map.addControl(directions, 'top-right');
 
   getAllYardSales();
-}
+};
