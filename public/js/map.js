@@ -1,4 +1,3 @@
-// Load Mapbox Directions API Plugin
 mapboxgl.accessToken = 'pk.eyJ1IjoidWFsaXUiLCJhIjoiY2xpczg4MXAxMWZzYTNmbXJqcXVjNnRpcCJ9.zsXLm4vVZDQ9w3NRS4bDsw';
 
 let map, directions;
@@ -19,16 +18,15 @@ function provideDirections(destination) {
 async function getAllYardSales() {
   try {
     const res = await fetch('/api/post/displayPostOnMap');
-    if (!res.ok) { // Check if response went through
+    if (!res.ok) {
       console.log('API response Error: ', res);
       return;
     }
     const data = await res.json();
-    if (!data.data) { // Check if data is not empty
+    if (!data.data) {
       console.log('Data Error: ', data);
       return;
     }
-    // Continue your processing
     const yardSales = data.data.map(yardSale => {
       return {
         type: 'Feature',
@@ -46,7 +44,7 @@ async function getAllYardSales() {
           date: yardSale.date,
           time: yardSale.time,
           userID: yardSale.userID.userName,
-          icon: 'cafe'
+          icon: 'shop'
         }
       };
     });
@@ -58,6 +56,13 @@ async function getAllYardSales() {
 
 // Load map with yard sales
 function loadMap(yardSales) {
+  map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/streets-v11',
+    zoom: 9,
+    center: [-80.49282, 43.45117]
+  });
+
   map.on('load', function() {
     map.addLayer({
       id: 'points',
@@ -98,21 +103,14 @@ function loadMap(yardSales) {
         .addTo(map);
     });
   });
-}
-
-window.onload = function() {
-  map = new mapboxgl.Map({
-    container: 'map',
-    style: 'mapbox://styles/mapbox/streets-v11',
-    zoom: 9,
-    center: [-80.49282, 43.45117]
-  });
 
   directions = new MapboxDirections({
     accessToken: mapboxgl.accessToken
   });
 
   map.addControl(directions, 'top-right');
+}
 
+window.onload = function() {
   getAllYardSales();
 };
