@@ -48,22 +48,37 @@ exports.postGarageSale = async (req, res) => {
 exports.displayPostOnMap = async (req, res, next) => {
   try {
     const today = new Date();
-    today.setHours(0,0,0,0);  // set the time to 00:00:00.000
+    today.setHours(0, 0, 0, 0);
 
     const yardSales = await Yard.find({
       date: { $gte: today }
-    }).populate('userID', 'userName');
+    });
+
+    const mappedYardSales = yardSales.map(yardSale => {
+      const { _id, location, title, description, date, time } = yardSale;
+      return {
+        _id,
+        location,
+        title,
+        description,
+        date,
+        time
+      };
+    });
 
     return res.status(200).json({
       success: true,
-      count: yardSales.length,
-      data: yardSales
-    })
+      count: mappedYardSales.length,
+      data: mappedYardSales
+    });
   } catch (err) {
-    console.error(err)
-    res.status(500).json({ error: 'Server error'})
+    console.error(err);
+    res.status(500).json({ error: 'Server error' });
   }
-}
+};
+
+
+
 
 exports.getAllPosts = async (req, res) => {
   try {
