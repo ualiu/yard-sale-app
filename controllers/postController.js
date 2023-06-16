@@ -52,18 +52,27 @@ exports.displayPostOnMap = async (req, res, next) => {
 
     const yardSales = await Yard.find({
       date: { $gte: today }
-    }).select('location title description date time')
+    }).populate('userID', 'userName'); // Only populate the 'userName' field
+
+    const sanitizedYardSales = yardSales.map(yardSale => ({
+      location: yardSale.location,
+      title: yardSale.title,
+      description: yardSale.description,
+      date: yardSale.date,
+      time: yardSale.time
+    }));
 
     return res.status(200).json({
       success: true,
-      count: yardSales.length,
-      data: yardSales
+      count: sanitizedYardSales.length,
+      data: sanitizedYardSales
     });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Server error' });
   }
 };
+
 
 
 
