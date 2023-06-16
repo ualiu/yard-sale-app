@@ -51,8 +51,8 @@ exports.displayPostOnMap = async (req, res, next) => {
     today.setHours(0,0,0,0);  // set the time to 00:00:00.000
 
     const yardSales = await Yard.find({
-      date: { $gte: today }  // only find yard sales that are today or in the future
-    }).populate('userID');
+      date: { $gte: today }
+    }).populate('userID', 'userName');
 
     return res.status(200).json({
       success: true,
