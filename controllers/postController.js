@@ -52,9 +52,8 @@ exports.displayPostOnMap = async (req, res, next) => {
 
     const yardSales = await Yard.find({
       date: { $gte: today }
-    }).select('location title description date time').populate('userID', 'userName');
+    }).select('location title description date time')
 
-    
     return res.status(200).json({
       success: true,
       count: yardSales.length,

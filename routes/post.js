@@ -5,7 +5,7 @@ const postController = require('../controllers/postController');
 // const multer = require('multer');
 // const upload = require('../config/upload');
 // const Post = require('../models/postModel')
-router.get('/displayPostOnMap', ensureAuth, postController.displayPostOnMap)
+router.get('/displayPostOnMap', postController.displayPostOnMap)
 
 
 router.get('/sellerHome', ensureAuth, postController.displaySellerHomePage)
