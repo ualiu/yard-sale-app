@@ -86,7 +86,7 @@ function loadMap(yardSales) {
 
     map.on('click', 'points', function (e) {
       const coordinates = e.features[0].geometry.coordinates.slice();
-      const { title, description, time, formattedAddress, date, userID } = e.features[0].properties;
+      const { title, description, time, formattedAddress, date } = e.features[0].properties;
 
       new mapboxgl.Popup()
         .setLngLat(coordinates)
@@ -96,7 +96,7 @@ function loadMap(yardSales) {
           <p><b>Where's the address:</b> ${formattedAddress}</p>
           <p><b>When:</b> ${new Date(date).toLocaleDateString()}</p>
           <p><b>Time:</b> ${time}</p>
-          <p><b>Who's organizing:</b> ${userID}</p>
+          
           <p class="text-primary">To enable Directions, allow the app to access your location, please!</p>
           <button class="btn btn-outline-success btn-lg" onclick="provideDirections([${coordinates[0]}, ${coordinates[1]}])">Get Directions</button>
         `)
