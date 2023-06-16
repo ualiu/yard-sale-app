@@ -43,7 +43,6 @@ async function getAllYardSales() {
           formattedAddress: yardSale.location.formattedAddress,
           date: yardSale.date,
           time: yardSale.time,
-          userID: yardSale.userID.userName,
           icon: 'shop'
         }
       };
