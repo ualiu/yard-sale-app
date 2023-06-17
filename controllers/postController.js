@@ -27,7 +27,7 @@ exports.userSubscribe = async (req, res) => {
 
     // Send a response indicating success
     console.log('success');
-    res.render('landingPage/landingPage.ejs');
+    res.render('landingPage/landingPage.ejs', { alertMessage: 'Thank you! You are subscribed successfully!' });
   } catch (error) {
     // Handle any errors
     res.status(500).send('An error occurred');

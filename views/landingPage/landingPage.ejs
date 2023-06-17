@@ -56,6 +56,11 @@
       <main class="container card-container">
         <div class="row justify-content-center">
           <section class="col-6 mt-5">
+            <% if (typeof alertMessage !== 'undefined') { %>
+              <div class="alert alert-success">
+                <%= alertMessage %>
+              </div>
+            <% } %>
             <p class="lead">Would you like to be notified about Yard Sales happening on weekends?</p>
 
               <form action="/api/post/subscribe" method="POST">
@@ -66,6 +71,7 @@
               </form>
           </section>
         </div>
+        
       </main>
       
     </div>
