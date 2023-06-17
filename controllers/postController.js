@@ -1,5 +1,6 @@
 const Post = require('../models/postModel')
 const Yard = require('../models/yardModel')
+const Email = require('../models/emailModel')
 const moment = require('moment');
 
 // displays new customer form -- added after
@@ -12,6 +13,27 @@ exports.displaySellerHomePage = (req, res) => {
   console.log('end point hit ok')
   res.render('sellerHome/sellerHomeMain.ejs');
 };
+
+// Handle the form submission
+exports.userSubscribe = async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    // Create a new instance of the Email model
+    const newEmail = new Email({ email });
+
+    // Save the email to the database
+    await newEmail.save();
+
+    // Send a response indicating success
+    console.log('success');
+    res.render('landingPage/landingPage.ejs');
+  } catch (error) {
+    // Handle any errors
+    res.status(500).send('An error occurred');
+  }
+};
+
 
 exports.postGarageSale = async (req, res) => {
   try {

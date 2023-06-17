@@ -19,6 +19,7 @@ router.get('/getEdit/:id', ensureAuth, postController.displayEditForm)
 
 
 router.post('/garageSale',  ensureAuth, postController.postGarageSale)
+router.post('/subscribe', postController.userSubscribe)
 router.put('/:id', ensureAuth, postController.updatePost)
 router.delete('/:id', ensureAuth, postController.deletePost)
 

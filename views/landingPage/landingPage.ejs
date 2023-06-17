@@ -52,6 +52,23 @@
           </a>
         </div>
       </div>
+
+      <main class="container card-container">
+        <div class="row justify-content-center">
+          <section class="col-6 mt-5">
+            <p class="lead">Would you like to be notified about Yard Sales happening on weekends?</p>
+
+              <form action="/api/post/subscribe" method="POST">
+                <div class="mb-3">
+                  <input type="email" name="email" class="form-control" placeholder="Enter your email address here" required>
+              </div>
+              <button class="btn btn-outline-danger btn-lg" type="submit">Subscribe</button>
+              </form>
+          </section>
+        </div>
+      </main>
+      
+    </div>
     </div>
   </div>
   
