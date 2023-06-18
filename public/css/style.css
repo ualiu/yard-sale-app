@@ -64,5 +64,14 @@ body {
     height: 400px; /* Adjust the height as needed */
     width: 100%; /* Adjust the width as needed */
   }
+
+  .non-bold {
+    font-weight: normal;
+  }
+  
+  .mobile-hero {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
   
 
