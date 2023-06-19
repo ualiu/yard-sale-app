@@ -59,6 +59,9 @@ exports.postGarageSale = async (req, res) => {
     // Save the new post to the database
     await newYard.save();
 
+    // Generate the post URL
+    const postUrl = `https://yardsail.onrender.com/api/post/${newYard._id}`;
+
     res.redirect('/api/post/sellerHome');
   } catch (error) {
     console.error(error);

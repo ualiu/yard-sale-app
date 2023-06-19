@@ -113,7 +113,7 @@
     </div>
     <div class="col-lg-6">
       <h1 class="display-5 fw-bold lh-1 mb-3">Find <span class="non-bold">Yard Sales</span> in Kitchener-Waterloo</h1>
-      <p class="lead">This is a free to use website which helps you find yard sales happening in our region in one spot. <br>If you are planning a yard sale soon, please consider adding it to the map. Simply, <b><u><a href="/signup">Sign-up</a></u></b>, create your listing, and share your upcoming sale with the community to attract more visitors.</p>
+      <p class="lead">This is a free to use website to help you find yard sales happening in our region in one spot. <br>If you are planning a yard sale soon, please consider adding it to the map. Simply, <b><u><a href="/signup">Sign-up</a></u></b>, create your listing, and share your upcoming sale with the community to attract more visitors.</p>
       <div class="d-grid gap-2 d-md-flex justify-content-md-start">
         <a href="/api/post/garagePosts" type="button" class="btn btn-outline-success btn-lg">See upcoming Yard Sales <i class="fas fa-arrow-right"></i>
         </a>
@@ -127,7 +127,7 @@
           <%= alertMessage %>
         </div>
       <% } %>
-      <p class="display-6 fw-regular lh-2"><b>Want to get yard sales to your Inbox every Saturday morning?</b></p>
+      <p class="display-6 fw-regular lh-2"><b>Want to get notified about yard sales every Saturday morning?</b></p>
       <form action="/api/post/subscribe" method="POST">
         <div class="mb-3">
           <input type="email" name="email" class="form-control" placeholder="Enter your email address here" required>

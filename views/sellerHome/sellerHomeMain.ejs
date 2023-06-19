@@ -86,7 +86,16 @@
                   <button type="submit" class="btn btn-outline-danger btn-md"><i class="fas fa-trash"></i> Delete</button>
                 </form>                
                 
-                
+                <button type="button" class="btn btn-outline-info btn-md" onclick="displayPostUrl('<%= sellerPost._id %>')">
+                  <i class="fas fa-share"></i> Share
+                </button>
+
+                <script>
+                  function displayPostUrl(postId) {
+                    const postUrl = `https://yardsail.onrender.com/api/post/garagePosts`;
+                    alert('Copy this link and paste to share >> ' + postUrl);
+                  }
+                </script>
               
               <script>
                   function alertMessage() {
