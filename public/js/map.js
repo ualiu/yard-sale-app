@@ -58,8 +58,8 @@ function loadMap(yardSales) {
   map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/streets-v11',
-    zoom: 9,
-    center: [-80.49282, 43.45117]
+    zoom: 11,
+    center: [-80.455965, 43.435609]
   });
 
   map.on('load', function() {
