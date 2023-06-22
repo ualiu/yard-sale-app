@@ -108,9 +108,11 @@
 
   <div class="container col-xxl-8 px-4 py-5 card-container">
   <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+
     <div class="col-12 col-sm-6 col-md-4 col-lg-6 text-center mb-1 mb-sm-0 mt-1 mt-sm-0">
       <img src="/imgs/heroMain.png" alt="this is an image of a garage sale" class="img-fluid mobile-hero" alt="Bootstrap Themes" width="400" height="267" loading="lazy">
-    </div>
+    </div> 
+    
     <div class="col-lg-6">
       <h1 class="display-5 fw-bold lh-1 mb-3">Find <span class="non-bold">Yard Sales</span> in Kitchener-Waterloo</h1>
       <p class="lead">This is a free to use website to help you find yard sales happening in our region in one spot. <br>If you are planning a yard sale soon, please consider adding it to the map. Simply, <b><u><a href="/signup">Sign-up</a></u></b>, create your listing, and share your upcoming sale with the community to attract more visitors.</p>
@@ -120,6 +122,17 @@
       </div>
     </div>
   </div>
+
+  <!-- <p class="lead">Message from the creator:</p>
+  <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+    <div class="video-wrapper">
+      <video controls class="img-fluid mobile-hero">
+        <source src="/imgs/herointro3.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </div> -->
+
   <div class="d-grid gap-2 d-md-flex justify-content-md-center">
     <section class="col-12 col-md-6">
       <% if (typeof alertMessage !== 'undefined') { %>
@@ -127,7 +140,7 @@
           <%= alertMessage %>
         </div>
       <% } %>
-      <p class="display-6 fw-regular lh-2"><b>Want to get notified about yard sales every Saturday morning?</b></p>
+      <p class="display-6 fw-regular lh-2 pt-4"><b>Want to get notified about yard sales every Saturday morning?</b></p>
       <form action="/api/post/subscribe" method="POST">
         <div class="mb-3">
           <input type="email" name="email" class="form-control" placeholder="Enter your email address here" required>
@@ -142,7 +155,7 @@
   
     
   <footer class="pt-5 d-flex flex-column align-items-center mt-auto text-black-50 text-center text-color-white">
-    <p>This project is a complicated search for simple ideas.</p><p>Connect with the creator: <a href="mailto:see.kreativ@gmail.com" class="text-black">Email</a></p>
+    <p>This project is a complicated search for simple ideas.</p><p>Connect with the creator: <a href="mailto:urim.aliu@gmail.com" class="text-black">Email</a></p>
 
   </footer>
 </div>
